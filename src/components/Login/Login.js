@@ -12,7 +12,9 @@ const Login = () => {
               <span class="label-text">Email</span>
             </label>
             <input
-              type="text"
+            required
+            name="email"
+              type="email"
               placeholder="Type here"
               class="input input-bordered"
             />
@@ -25,7 +27,9 @@ const Login = () => {
               <span class="label-text">Password</span>
             </label>
             <input
-              type="text"
+            required
+            name="password"
+              type="password"
               placeholder="Type here"
               class="input input-bordered"
             />
