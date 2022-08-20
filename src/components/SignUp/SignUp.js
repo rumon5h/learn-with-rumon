@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import toast from "react-hot-toast";
@@ -9,6 +9,7 @@ import Loading from "../Loading/Loading";
 
 const SignUp = () => {
   const [error2, setError2] = useState(null);
+  const navigate = useNavigate();
 
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
@@ -30,9 +31,12 @@ const SignUp = () => {
   };
 
   if (loading || updating) {
-    return <Loading/>
+    return <Loading />;
   }
-  console.log(user);
+
+  if (user) {
+    return navigate("/home");
+  }
 
   return (
     <div className="flex justify-center items-center my-5 ">
@@ -74,8 +78,8 @@ const SignUp = () => {
               placeholder="Type here"
               className="input input-bordered"
             />
-            {error && toast.error(error.message, {id: 'error'})}
-            {uError && toast.error(uError.message, {id: 'uError'})}
+            {error && toast.error(error.message, { id: "error" })}
+            {uError && toast.error(uError.message, { id: "uError" })}
           </div>
           <div className="form-control my-2">
             <label className="label">
