@@ -3,6 +3,7 @@ import Banner from "../Banner/Banner";
 import Benefit from "../Benefit/Benefit";
 import Courses from "../Courses/Courses";
 import Footer from "../Footer/Footer";
+import JobSearch from "../JobSearch/JobSearch";
 
 const Home = () => {
   return (
@@ -10,6 +11,7 @@ const Home = () => {
       <Banner />
       <Benefit/>
       <Courses/>
+      <JobSearch/>
       <Footer />
     </div>
   );
