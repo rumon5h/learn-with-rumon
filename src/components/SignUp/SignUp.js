@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import { useUpdateProfile } from "react-firebase-hooks/auth";
 import { async } from "@firebase/util";
 import Loading from "../Loading/Loading";
+import GoogleAuth from "../GoogleAuth/GoogleAuth";
 
 const SignUp = () => {
   const [error2, setError2] = useState(null);
@@ -106,6 +107,7 @@ const SignUp = () => {
           </p>
           <input className="btn w-full " type="submit" value="SignUp" />
         </form>
+        <GoogleAuth/>
       </div>
     </div>
   );

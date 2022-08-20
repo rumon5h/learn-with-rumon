@@ -3,6 +3,7 @@ import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
+import GoogleAuth from "../GoogleAuth/GoogleAuth";
 import Loading from "../Loading/Loading";
 
 const Login = () => {
@@ -63,6 +64,7 @@ const Login = () => {
           </p>
           <input className="btn w-full " type="submit" value="LogIn" />
         </form>
+        <GoogleAuth/>
       </div>
     </div>
   );
