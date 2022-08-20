@@ -15,7 +15,6 @@ const Navbar = () => {
   const logout = () => {
     signOut(auth);
   };
-  console.log(user?.displayName);
 
   return (
     <div className="navbar flex-col md:flex-row  left-0 z-10 bg-gray-900 text-white">

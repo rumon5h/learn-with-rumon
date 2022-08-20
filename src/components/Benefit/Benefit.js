@@ -27,7 +27,7 @@ const Benefit = () => {
   ];
 
   return (
-    <div className="my-10 p-5 ">
+    <div className="my-10 p-5">
       <h2 className="text-4xl text-center text-gray-900">
         Take the first step toward your new career!
       </h2>
@@ -35,13 +35,13 @@ const Benefit = () => {
         Get professional-level training and earn a credential from a leading
         company.
       </p>
-      <div className="grid grid-cols-1 mt-5 md:grid-cols-2 lg:grid-cols-3 gap-2 ">
+      <div className="grid grid-cols-1 mt-5 md:grid-cols-2  lg:grid-cols-3 gap-2 ">
         {
           benefits.map(benefit => {
             const {id, title, img, body} = benefit;
 
             return <article
-            className="text-center card shadow-md p-3"
+            className="text-center mx-auto card shadow-md p-3"
             key={id}>
               <img className="mx-auto" src={img} alt="" />
               <h4 className="my-3">{title}</h4>
