@@ -4,6 +4,8 @@ import Login from './components/Login/Login';
 import Navbar from './components/Navbar/Navbar';
 import SignUp from './components/SignUp/SignUp';
 import  { Toaster } from 'react-hot-toast';
+import Home from './components/Home/Home';
+import Courses from './components/Courses/Courses';
 
 function App() {
   return (
@@ -12,6 +14,8 @@ function App() {
       <Routes>
         <Route path='/login' element={<Login/>}></Route>
         <Route path='/signup' element={<SignUp/>}></Route>
+        <Route path='/home' element={<Home/>}></Route>
+        <Route path='/courses' element={<Courses/>}></Route>
       </Routes>
      <Toaster/>
     </div>
