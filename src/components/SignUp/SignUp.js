@@ -1,80 +1,110 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import auth from "../../firebase.init";
+import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
+import toast from "react-hot-toast";
+import { useUpdateProfile } from "react-firebase-hooks/auth";
+import { async } from "@firebase/util";
+import Loading from "../Loading/Loading";
 
 const SignUp = () => {
-    return (
-        <div className="flex justify-center items-center my-5 ">
-      <div class="card w-[400px] items-center bg-base-100 py-5 shadow-xl">
+  const [error2, setError2] = useState(null);
+
+  const [createUserWithEmailAndPassword, user, loading, error] =
+    useCreateUserWithEmailAndPassword(auth);
+  const [updateProfile, updating, uError] = useUpdateProfile(auth);
+
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+    const displayName = e.target.name.value;
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    const confirmPassword = e.target.confirmPassword.value;
+
+    if (password !== confirmPassword) {
+      return setError2("Password did not match.");
+    }
+
+    await createUserWithEmailAndPassword(email, password);
+    await updateProfile({ displayName });
+  };
+
+  if (loading || updating) {
+    return <Loading/>
+  }
+  console.log(user);
+
+  return (
+    <div className="flex justify-center items-center my-5 ">
+      <div className="card w-[400px] items-center bg-base-100 py-5 shadow-xl">
         <h2 className="text-3xl py-3">Create New Account!</h2>
-        <form className="w-[300px]">
-          <div class="form-control my-2">
-            <label class="label">
-              <span class="label-text">Name</span>
+        <form onSubmit={handleSignUp} className="w-[300px]">
+          <div className="form-control my-2">
+            <label className="label">
+              <span className="label-text">Name</span>
             </label>
             <input
-            required
-            name='name'
+              required
+              name="name"
               type="text"
               placeholder="Type here"
-              class="input input-bordered"
+              className="input input-bordered"
             />
-            <label class="label">
-              <span class="label-text-alt">Alt label</span>
-            </label>
           </div>
-          <div class="form-control my-2">
-            <label class="label">
-              <span class="label-text">Email</span>
+          <div className="form-control my-2">
+            <label className="label">
+              <span className="label-text">Email</span>
             </label>
             <input
-            required
-            name='email'
+              required
+              name="email"
               type="email"
               placeholder="Type here"
-              class="input input-bordered"
+              className="input input-bordered"
             />
-            <label class="label">
-              <span class="label-text-alt">Alt label</span>
-            </label>
           </div>
-          <div class="form-control my-2">
-            <label class="label">
-              <span class="label-text">Password</span>
+          <div className="form-control my-2">
+            <label className="label">
+              <span className="label-text">Password</span>
             </label>
             <input
-            required
-            name='password'
+              required
+              name="password"
               type="password"
               placeholder="Type here"
-              class="input input-bordered"
+              className="input input-bordered"
             />
-            <label class="label">
-              <span class="label-text-alt">Alt label</span>
-            </label>
+            {error && toast.error(error.message, {id: 'error'})}
+            {uError && toast.error(uError.message, {id: 'uError'})}
           </div>
-          <div class="form-control my-2">
-            <label class="label">
-              <span class="label-text">Confirm Password</span>
+          <div className="form-control my-2">
+            <label className="label">
+              <span className="label-text">Confirm Password</span>
             </label>
             <input
-            required
-            name='confirm-password'
+              required
+              name="confirmPassword"
               type="password"
               placeholder="Type here"
-              class="input input-bordered"
+              className="input input-bordered"
             />
-            <label class="label">
-              <span class="label-text-alt">Alt label</span>
+            <label className="label">
+              {error2 && (
+                <span className="label-text-alt text-red-700">{error2}</span>
+              )}
             </label>
           </div>
           <p className="mb-2">
-            <span className="text-gray-900">Already have an account?</span> <Link to="/login" className="text-blue-700 ">LogIn</Link>
+            <span className="text-gray-900">Already have an account?</span>
+            <Link to="/login" className="text-blue-700 ">
+              LogIn
+            </Link>
           </p>
           <input className="btn w-full " type="submit" value="SignUp" />
         </form>
       </div>
     </div>
-    );
+  );
 };
 
 export default SignUp;

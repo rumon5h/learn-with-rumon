@@ -3,6 +3,7 @@ import './App.css';
 import Login from './components/Login/Login';
 import Navbar from './components/Navbar/Navbar';
 import SignUp from './components/SignUp/SignUp';
+import  { Toaster } from 'react-hot-toast';
 
 function App() {
   return (
@@ -12,7 +13,7 @@ function App() {
         <Route path='/login' element={<Login/>}></Route>
         <Route path='/signup' element={<SignUp/>}></Route>
       </Routes>
-     
+     <Toaster/>
     </div>
   );
 }
