@@ -4,7 +4,7 @@ import bannerImage from '../../images/bannerImage.jpg';
 
 const Banner = () => {
   return (
-    <div className="grid grid-col-reverse grid-cols-1 md:grid-cols-2 gap-5 p-5 w-full">
+    <div className="grid grid-col-reverse grid-cols-1 md:grid-cols-2 gap-5 p-5 my-10 w-full">
         
         <div className="w-full">
           <h1 className="text-3xl font-bold">Launch your new career with a Professional Certificate!</h1>
