@@ -7,6 +7,8 @@ import  { Toaster } from 'react-hot-toast';
 import Home from './components/Home/Home';
 import Courses from './components/Courses/Courses';
 import ErrorPage from './components/ErrorPage/ErrorPage';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import BuyCourse from './components/BuyCourse/BuyCourse';
 
 function App() {
   return (
@@ -18,6 +20,11 @@ function App() {
         <Route path='/courses' element={<Courses/>}></Route>
         <Route path='/login' element={<Login/>}></Route>
         <Route path='/signup' element={<SignUp/>}></Route>
+        <Route path='/course/:id' element={
+          <PrivateRoute>
+            <BuyCourse></BuyCourse>
+          </PrivateRoute>
+        }></Route>
         <Route path='*' element={<ErrorPage/>}></Route>
       </Routes>
      <Toaster/>

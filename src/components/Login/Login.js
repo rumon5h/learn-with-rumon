@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import toast from "react-hot-toast";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 import GoogleAuth from "../GoogleAuth/GoogleAuth";
 import Loading from "../Loading/Loading";
@@ -10,6 +10,8 @@ const Login = () => {
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
   const navigate = useNavigate();
+  const location = useLocation();
+  let from = location.state?.from?.pathname || '/';
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -18,13 +20,18 @@ const Login = () => {
 
     signInWithEmailAndPassword(email, password);
   };
+
+  useEffect(() => {
+    if (user) {
+      navigate(from, { replace: true });
+   }
+  },[user, from, navigate]);
+
   if (loading) {
     return <Loading />;
   }
 
-  if (user) {
-    return navigate("/home");
-  }
+ 
 
   return (
     <div className="flex justify-center items-center my-5 ">
@@ -64,7 +71,7 @@ const Login = () => {
           </p>
           <input className="btn w-full " type="submit" value="LogIn" />
         </form>
-        <GoogleAuth/>
+        <GoogleAuth />
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import toast from "react-hot-toast";
@@ -11,9 +11,12 @@ import GoogleAuth from "../GoogleAuth/GoogleAuth";
 const SignUp = () => {
   const [error2, setError2] = useState(null);
   const navigate = useNavigate();
+  const location = useLocation();
+  let from = location.state?.from?.pathname || "/";
 
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
+
   const [updateProfile, updating, uError] = useUpdateProfile(auth);
 
   const handleSignUp = async (e) => {
@@ -31,12 +34,14 @@ const SignUp = () => {
     await updateProfile({ displayName });
   };
 
+  useEffect(() => {
+    if (user) {
+      navigate(from, { replace: true });
+    }
+  }, [user, from, navigate]);
+
   if (loading || updating) {
     return <Loading />;
-  }
-
-  if (user) {
-    return navigate("/home");
   }
 
   return (
@@ -107,7 +112,7 @@ const SignUp = () => {
           </p>
           <input className="btn w-full " type="submit" value="SignUp" />
         </form>
-        <GoogleAuth/>
+        <GoogleAuth />
       </div>
     </div>
   );
