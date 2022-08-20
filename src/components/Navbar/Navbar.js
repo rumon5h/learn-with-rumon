@@ -15,9 +15,10 @@ const Navbar = () => {
   const logout = () => {
     signOut(auth);
   };
+  console.log(user?.displayName);
 
   return (
-    <div className="navbar flex-col md:flex-row bg-gray-900 text-white">
+    <div className="navbar flex-col md:flex-row  left-0 z-10 bg-gray-900 text-white">
       <div className="flex-1">
         <Link to="/" className="btn btn-ghost normal-case text-xl">
           Learn with Rumon
@@ -48,8 +49,7 @@ const Navbar = () => {
             >
               <li>
                 <Link to="" className="justify-between">
-                  Profile
-                  <span className="badge">New</span>
+                  {user?.displayName}
                 </Link>
               </li>
               <li>
