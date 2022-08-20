@@ -105,8 +105,8 @@ const SignUp = () => {
             </label>
           </div>
           <p className="mb-2">
-            <span className="text-gray-900">Already have an account?</span>
-            <Link to="/login" className="text-blue-700 ">
+            <span className="text-gray-900">Already have an account? </span>
+             <Link to="/login" className="text-blue-700 ">
               LogIn
             </Link>
           </p>

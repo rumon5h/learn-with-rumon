@@ -6,7 +6,7 @@ const BuyCourse = () => {
   const courses = useCourse();
 
   const { id } = useParams();
-  const course = courses?.find((course) => course.id == id);
+  const course = courses?.find((course) => course.id === id);
   
 
   return (
