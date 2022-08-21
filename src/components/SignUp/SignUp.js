@@ -35,14 +35,18 @@ const SignUp = () => {
   };
 
   useEffect(() => {
+    if (loading || updating) {
+      return <Loading />;
+    }
+  },[loading, updating])
+
+  useEffect(() => {
     if (user) {
       navigate(from, { replace: true });
     }
   }, [user, from, navigate]);
 
-  if (loading || updating) {
-    return <Loading />;
-  }
+  
 
   return (
     <div className="flex justify-center items-center my-5 ">
