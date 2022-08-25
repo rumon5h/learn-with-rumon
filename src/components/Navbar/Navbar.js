@@ -17,7 +17,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="navbar flex-col md:flex-row z-10 bg-gray-900 text-white">
+    <div className="navbar flex-col sticky top-0 md:flex-row z-10 bg-gray-900 text-white">
       <div className="flex-1">
         <Link to="/" className="btn btn-ghost normal-case text-xl">
           Learn with Rumon
