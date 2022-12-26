@@ -11,6 +11,8 @@ import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import BuyCourse from './components/BuyCourse/BuyCourse';
 
 function App() {
+ 
+  
   return (
     <div className='max-w-7xl mx-auto '>
       <Navbar></Navbar>

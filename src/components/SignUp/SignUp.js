@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import auth from "../../firebase.init";
-import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
+import { useCreateUserWithEmailAndPassword, useSignInWithGoogle } from "react-firebase-hooks/auth";
 import toast from "react-hot-toast";
 import { useUpdateProfile } from "react-firebase-hooks/auth";
-import { async } from "@firebase/util";
 import Loading from "../Loading/Loading";
-import GoogleAuth from "../GoogleAuth/GoogleAuth";
+import auth from "../../firebase.init";
 
 const SignUp = () => {
+  const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
   const [error2, setError2] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
@@ -35,16 +34,18 @@ const SignUp = () => {
   };
 
   useEffect(() => {
-    if (loading || updating) {
-      return <Loading />;
+    if (loading || updating || gLoading) {
+      return () => {
+        <Loading/>
+     };
     }
-  },[loading, updating])
+  },[loading, updating, gLoading])
 
   useEffect(() => {
-    if (user) {
+    if (user || gUser) {
       navigate(from, { replace: true });
     }
-  }, [user, from, navigate]);
+  }, [user, from, navigate, gUser]);
 
   
 
@@ -90,6 +91,8 @@ const SignUp = () => {
             />
             {error && toast.error(error.message, { id: "error" })}
             {uError && toast.error(uError.message, { id: "uError" })}
+            {gError && toast.error(gError.message, { id: "gError" })}
+
           </div>
           <div className="form-control my-2">
             <label className="label">
@@ -116,7 +119,12 @@ const SignUp = () => {
           </p>
           <input className="btn w-full " type="submit" value="SignUp" />
         </form>
-        <GoogleAuth />
+        <button
+        onClick={() => signInWithGoogle()}
+        className="btn btn-outline w-[300px] my-2"
+      >
+        Continue with Google
+      </button>
       </div>
     </div>
   );
