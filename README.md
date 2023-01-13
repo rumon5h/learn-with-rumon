@@ -12,3 +12,7 @@
 * Firebase
 * React Firebase hook
 * React hot toast
+
+## Install dependencies `npm i`
+## Starting command `npm start`
+
